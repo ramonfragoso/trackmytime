@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { StyledApp, Title, Charts } from './style';
+import Header from './components/Header';
+import Menu from './components/Menu';
+import PieChart from './components/PieChart';
+import BarChart from './components/BarChart';
+import Top10 from './components/Top10';
+const App = () => {
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [range, setRange] = useState('all');
+
+    return (
+        <StyledApp>
+            <Header/>
+            <Title>Suas estatísticas</Title>
+            <Menu range={range} setRange={setRange}/>
+            <Charts>
+                <PieChart/>
+                <BarChart/>
+            </Charts>
+            <Top10/>
+        </StyledApp>
+    )
 }
 
 export default App;
