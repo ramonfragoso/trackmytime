@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container } from './style';
 import { Chart} from "react-google-charts";
 
 
 const PieChart = () => {
-    const [options, setOptions] = React.useState({
+    const [options, setOptions] = useState({
         title: 'Sites mais acessados'
       })
-      const [data, setData] = React.useState([
+      const [data, setData] = useState([
         ['Linguagens', 'Quantidade'],
         ['Google', 100],
         ['Youtube', 80],

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container } from './style';
 import { Chart} from "react-google-charts";
 
 
 const BarChart = () => {
-    const [options, setOptions] = React.useState({
+    const [options, setOptions] = useState({
         title: 'Sites mais acessados'
       })
-      const [data, setDataBar] = React.useState([
+      const [data, setDataBar] = useState([
         ['Sites', 'Acessos'],
         ['Google', 100],
         ['Youtube', 80],
