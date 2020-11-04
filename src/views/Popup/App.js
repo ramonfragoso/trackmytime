@@ -1,22 +1,15 @@
 import React from 'react'
 import './App.css'
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <header className="App-header">
         <p>Popup page</p>
         <p>
-          Edit <code>src/views/Popup/App.js</code> and save.
+          {JSON.stringify(props.data)}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {console.log("11")}
       </header>
     </div>
   );
