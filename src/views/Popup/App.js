@@ -1,18 +1,25 @@
-import React from 'react'
-import './App.css'
+import React, { useState } from 'react';
+import { StyledApp, Title, Charts } from './style';
+import Header from '../../components/Header';
+import Menu from '../../components/Menu';
+import PieChart from '../../components/PieChart';
+import Top10 from '../../components/Top10';
 
-function App(props) {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>Popup page</p>
-        <p>
-          {JSON.stringify(props.data)}
-        </p>
-        {console.log("11")}
-      </header>
-    </div>
-  );
+const App = (props) => {
+
+    const [range, setRange] = useState('all');
+    const { data } = props;
+    return (
+        <StyledApp>
+            <Header/> 
+            <Title>Suas estatísticas</Title>
+            <Menu range={range} setRange={setRange}/>
+            <Charts>
+                <PieChart/>
+                <Top10/>
+            </Charts>
+        </StyledApp>
+    )
 }
 
-export default App
+export default App;
