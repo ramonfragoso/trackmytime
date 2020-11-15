@@ -3,12 +3,9 @@ import theme from '../../views/Popup/theme';
 
 export const Container = styled.div`
     width: 100%;
-
     display: flex;
     align-items: center;    
     justify-content:space-between;
-    padding-top: 10px;
-    height: 80px;
 `;
 
 export const Icon = styled.img`

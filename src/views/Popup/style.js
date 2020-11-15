@@ -11,11 +11,7 @@ export const StyledApp = styled.div`
     flex-direction: column;
     font-weight: 900;
     background: #151924;
-    padding: 0px 10px;
-
-    @media (max-width: 1366px) {
-        width: 100%;
-    }
+    padding: 0px 20px;
 `;
 
 export const Title = styled.div`
@@ -27,9 +23,10 @@ export const Title = styled.div`
 
 export const Charts = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding-top: 20px;
+    height: 100%;
+    margin-top: 20px;
 `;

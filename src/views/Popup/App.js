@@ -15,8 +15,8 @@ const App = (props) => {
             <Title>Suas estatísticas</Title>
             <Menu range={range} setRange={setRange}/>
             <Charts>
-                <PieChart/>
-                <Top10/>
+                <PieChart data={data}/>
+                <Top10 data={data}/>
             </Charts>
         </StyledApp>
     )
