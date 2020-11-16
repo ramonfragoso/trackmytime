@@ -3,9 +3,6 @@ import { Container, Title, ButtonGroup, Button } from './style';
 
 const Menu = ({range, setRange}) => {
 
-
-
-
     return (
         <Container>
             <Title>Selecione o período de tempo que você deseja visualizar seus dados:</Title> 
@@ -14,7 +11,6 @@ const Menu = ({range, setRange}) => {
                 <Button isSelected={range==='week'} onClick={() => setRange('week')}>Há uma semana</Button>
                 <Button isSelected={range==='month'} onClick={() => setRange('month')}>Há um mês</Button>
                 <Button isSelected={range==='all'} onClick={() => setRange('all')}>Todo o período</Button>
-                <Button isSelected={range==='personalized'} onClick={() => setRange('personalized')}>Personalizado</Button>
             </ButtonGroup>
         </Container>
     )

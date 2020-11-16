@@ -1,6 +1,39 @@
 import React from 'react';
 import { Container } from './style';
 import { Pie } from 'react-chartjs-2'
+import {randomCssRgba} from "../../util";
+
+const websiteNames = (data) => {
+    let names = []
+    for(let website of data){
+        names.push(website.name)
+    }
+    return names;
+}
+
+const websiteTimes = (data) => {
+    let times = []
+    for(let website of data){
+        times.push(website.timeSpent)
+    }
+    return times;
+}
+
+const generateRandomColors = (data) => {
+    let times = 0;
+    let backgroundColors = []
+    let borderColors = []
+    if(data.length >= 10){
+        times = 10;
+    }
+    else times = data.length;
+    for(let i = 0; i < times; i++){
+        let color = randomCssRgba('0.7');
+        backgroundColors.push(color);
+        borderColors.push(color.replace("0.7", "1"));
+    } 
+    return {borderColors, backgroundColors}
+}
 
 const data = {
     labels: [
@@ -48,6 +81,23 @@ const data = {
     ],
   }
 
+const createData = (data) => {
+    const colors = generateRandomColors(data);
+    return {
+        labels: websiteNames(data),
+        datasets: [
+          {
+            label: '# of Votes',
+            data: websiteTimes(data),
+            backgroundColor: colors.backgroundColors,
+            borderColor: colors.borderColors,
+            borderWidth: 1,
+          },
+        ],
+    }
+}
+  
+
 const options = {
     legend: {
         position: 'left',
@@ -57,13 +107,14 @@ const options = {
     }
 }
 
-const PieChart = () => {
 
+const PieChart = ({data}) => {
+    const chartData = createData(data);
     return (
         <Container>
-            <h2>Top 10 sites mais acessados</h2>
+            <h2>Top 10 sites mais acessados (segundos)</h2>
             <div style={{width: '100%', height: '100%'}}>
-                <Pie style={{border: 'solid green'}} data={data} options={options}/> 
+                <Pie style={{border: 'solid green'}} data={chartData} options={options}/> 
             </div>
         </Container>
     )
