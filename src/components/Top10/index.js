@@ -67,7 +67,19 @@ const createData = (data) => {
           },
         },
       ],
-    },
+    },   
+    tooltips: { 
+      callbacks: {
+              label: function(tooltipItem, data) {
+                  var timestamp = data['datasets'][0]['data'][tooltipItem['index']]
+                  var hours = Math.floor(timestamp / 60 / 60);
+                  var minutes = Math.floor(timestamp / 60) - (hours * 60);
+                  var seconds = timestamp % 60;
+
+                  return hours + 'h' + minutes + 'm' + seconds + 's'
+              },
+          }
+  }
   }
 
 const Top10 = ({data}) => {
