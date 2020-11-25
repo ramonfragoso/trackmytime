@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Extension Name",
-  "version": "0.1",
-  "description": "Some Description",
+  "name": "TrackMyTime",
+  "version": "1.0",
+  "description": "This apps tracks all the time you spent activelly on websites, and then displays charts for you to track the time you have spent on the internet.",
   "permissions": [
     "storage",
     "webNavigation",
