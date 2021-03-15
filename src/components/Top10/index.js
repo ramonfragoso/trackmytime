@@ -82,12 +82,41 @@ const createData = (data) => {
   }
   }
 
-const Top10 = ({data}) => {
+const Top10 = ({data, darkMode}) => {
+  
+  const options = {
+    legend: {
+        display: false,
+        labels: {
+            fontColor: darkMode ? 'white' : "#151924"
+        }
+    },
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },   
+    tooltips: { 
+      callbacks: {
+              label: function(tooltipItem, data) {
+                  var timestamp = data['datasets'][0]['data'][tooltipItem['index']]
+                  var hours = Math.floor(timestamp / 60 / 60);
+                  var minutes = Math.floor(timestamp / 60) - (hours * 60);
+                  var seconds = timestamp % 60;
 
+                  return hours + 'h' + minutes + 'm' + seconds + 's'
+              },
+          }
+  }
+  }
     return (
         <Container>    
-            <h2>Quantos segundos você passou em cada dia:</h2>
-            <HorizontalBar data={createData(data)} options={options} />
+            <h2 style={{color: darkMode ? "white" : "#151924"}}>Quanto tempo você passou em cada dia:</h2>
+            <HorizontalBar darkMode={darkMode} data={createData(data)} options={options} />
         </Container>
     )
 }

@@ -7,7 +7,8 @@ import Top10 from '../../components/Top10';
 import { parseTop10Today, parseTop10LastWeek, parseTop10LastMonth, parseTop10AllPeriod, parseTimeLastWeek } from '../../util';
 
 const App = (props) => {
-
+    const [darkMode, setDarkMode] = useState(true)
+    console.log(props);
     const [range, setRange] = useState('all');
     const { data } = props;
     const parser = {
@@ -17,13 +18,13 @@ const App = (props) => {
         'all': parseTop10AllPeriod
     }
     return (
-        <StyledApp>
-            <Header/>
-            <Title>Suas estatísticas</Title>
-            <Menu range={range} setRange={setRange}/>
+        <StyledApp darkMode={darkMode}>
+            <Header shouldMonitor={data.shouldMonitor} darkMode={darkMode} setDarkMode={setDarkMode} data={data}/>
+            <Title darkMode={darkMode}>Suas estatísticas</Title>
+            <Menu darkMode={darkMode} range={range} setRange={setRange}/>
             <Charts>
-                <PieChart data={parser[range](data)}/>
-                <Top10 data={parseTimeLastWeek(data)}/>
+                <PieChart darkMode={darkMode} data={parser[range](data)}/>
+                <Top10 darkMode={darkMode} data={parseTimeLastWeek(data)}/>
             </Charts>
         </StyledApp>
     )

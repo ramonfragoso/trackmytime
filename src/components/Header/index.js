@@ -5,10 +5,9 @@ import image from './icon.png';
 import on from './bulbOn.png';
 import off from './bulbOff.png';
 
-const Header = () => {
+const Header = ({darkMode, setDarkMode, shouldMonitor}) => {
 
-    const [darkMode, setDarkMode] = useState(true)
-    const [isCounterOn, setIsCounterOn] = useState(true)
+    const [isCounterOn, setIsCounterOn] = useState(shouldMonitor)
 
     const handleDarkMode = () => {
         setDarkMode(!darkMode);
@@ -16,6 +15,9 @@ const Header = () => {
     }   
 
     const handleCounter = () => {
+        chrome.storage.local.get(null, function(data){
+            chrome.storage.local.set({"shouldMonitor": !isCounterOn, "last_visited": ""}, () => {})
+        });
         setIsCounterOn(!isCounterOn);
         //TODO : LIGAR OU DESLIGAR O CONTADOR
     }  
@@ -24,11 +26,11 @@ const Header = () => {
         <Container>
             <Left>
                 <Icon src={image}/>
-                <Title>TrackMyTime</Title>
+                <Title darkMode={darkMode}>TrackMyTime</Title>
             </Left>
             <Right>
                 <StyledLink>
-                    <Label>ON/OFF</Label>
+                    <Label darkMode={darkMode}>ON/OFF</Label>
                     <Switch 
                         height={20} 
                         width={45} 

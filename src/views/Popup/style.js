@@ -10,7 +10,7 @@ export const StyledApp = styled.div`
     justify-content: flex-start;
     flex-direction: column;
     font-weight: 900;
-    background: #151924;
+    background: ${(props) => props.darkMode ? "#151924" : "eee"};
     padding: 0px 20px;
 `;
 
@@ -18,7 +18,7 @@ export const Title = styled.div`
     font-size: 300%;
     font-weight: 900;
     padding: 40px 0px 0px 0px;
-    color: white;
+    color: ${props => props.darkMode ? "white": "#151924"};
 `;
 
 export const Charts = styled.div`

@@ -6,8 +6,7 @@
   "permissions": [
     "storage",
     "webNavigation",
-    "tabs",
-    "runtime"
+    "tabs"
   ],
   "background": {
     "scripts": ["static/js/background.js"]

@@ -52,36 +52,37 @@ const createData = (data) => {
 }
   
 
-const options = {
-    legend: {
-        position: 'left',
-        labels: {
-            fontColor: 'white'
-        }
-    },
-    tooltips: { 
-        callbacks: {
-                label: function(tooltipItem, data) {
-                    var timestamp = data['datasets'][0]['data'][tooltipItem['index']]
-                    var hours = Math.floor(timestamp / 60 / 60);
-                    var minutes = Math.floor(timestamp / 60) - (hours * 60);
-                    var seconds = timestamp % 60;
 
-                    return hours + 'h' + minutes + 'm' + seconds + 's'
-                },
-                title: function(tooltipItem, data) {
-                    return data['labels'][tooltipItem[0]['index']];
-                },
+
+
+const PieChart = ({data, darkMode}) => {
+    const options = {
+        legend: {
+            position: 'left',
+            labels: {
+                fontColor: darkMode ? 'white' : "#151924"
             }
+        },
+        tooltips: { 
+            callbacks: {
+                    label: function(tooltipItem, data) {
+                        var timestamp = data['datasets'][0]['data'][tooltipItem['index']]
+                        var hours = Math.floor(timestamp / 60 / 60);
+                        var minutes = Math.floor(timestamp / 60) - (hours * 60);
+                        var seconds = timestamp % 60;
+    
+                        return hours + 'h' + minutes + 'm' + seconds + 's'
+                    },
+                    title: function(tooltipItem, data) {
+                        return data['labels'][tooltipItem[0]['index']];
+                    },
+                }
+        }
     }
-}
-
-
-const PieChart = ({data}) => {
     const chartData = createData(data);
     return (
         <Container>
-            <h2>Top 10 sites mais acessados (segundos)</h2>
+            <h2 style={{color: darkMode ? "white" : "#151924"}}>Top 10 sites mais acessados (segundos)</h2>
             <div style={{width: '100%', height: '100%'}}>
                 <Pie style={{border: 'solid green'}} data={chartData} options={options}/> 
             </div>

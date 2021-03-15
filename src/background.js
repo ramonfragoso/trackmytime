@@ -31,8 +31,8 @@ chrome.runtime.onInstalled.addListener(function(details){
 })
 
 function handler(details) {
-    chrome.storage.local.get(['shouldMonitor'], function(data){    
-        if(true){
+    chrome.storage.local.get(['shouldMonitor'], function(data){
+        if(data.shouldMonitor){
             chrome.tabs.get(details.tabId, function(tab) {
                 chrome.storage.local.get(['last_visited'], function(data){
                     let last_visited = helper(data.last_visited);
@@ -63,7 +63,6 @@ function handler(details) {
         
         
                                     chrome.storage.local.set({data: data}, () => {})
-                                    console.log(data);
                                 }
                             })
                         })

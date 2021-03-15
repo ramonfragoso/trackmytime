@@ -15,17 +15,19 @@ export const Icon = styled.img`
 `;
 
 export const BulbIcon = styled.img`
+    color: ${props => props.darkMode ? "fff": "000"}
     width: 50px;
     height: 50px;
 `;
 
 export const Label = styled.div`
     margin: 10px 0px;
+    color: ${props => props.darkMode ? "white" : "#151924"};
 `;
 
 export const Title = styled.div`
     font-size: 200%;
-    color: white;
+    color: ${props => props.darkMode ? "white" : "#0000ff"};
 `;
 
 export const Left = styled.div`
