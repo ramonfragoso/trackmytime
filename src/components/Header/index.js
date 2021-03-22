@@ -11,14 +11,16 @@ const Header = ({darkMode, setDarkMode, shouldMonitor}) => {
 
     const handleDarkMode = () => {
         setDarkMode(!darkMode);
-        //TODO : MUDAR DE FATO O MODO NEGRO
+        //TODO : MUDAR DE FATO O MODO DARK
     }   
 
     const handleCounter = () => {
         chrome.storage.local.get(null, function(data){
             chrome.storage.local.set({"shouldMonitor": !isCounterOn, "last_visited": ""}, () => {})
         });
+        chrome.runtime.sendMessage({ "newIconPath" : isCounterOn ? "logo192dark.png" : "logo128.png" });
         setIsCounterOn(!isCounterOn);
+        
         //TODO : LIGAR OU DESLIGAR O CONTADOR
     }  
 

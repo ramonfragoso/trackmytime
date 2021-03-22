@@ -10,6 +10,14 @@ function helper(url){
     return "";
 }
 
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        console.log("@");
+        chrome.browserAction.setIcon({
+            path: request.newIconPath
+        });
+    });
+
 chrome.runtime.onInstalled.addListener(function(details){
     chrome.storage.local.set({
         shouldMonitor: true,
