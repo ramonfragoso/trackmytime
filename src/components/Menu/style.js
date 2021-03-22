@@ -20,7 +20,6 @@ export const ButtonGroup = styled.div`
 `;
 
 export const Button = styled.div`
-
     border-radius: 15px;
     padding: 10px;
     color: white;

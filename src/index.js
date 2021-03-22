@@ -10,10 +10,3 @@ chrome.storage.local.get(null, function (data) {
     document.getElementById('root')
   )
 });
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// )

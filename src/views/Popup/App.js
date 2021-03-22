@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Menu from '../../components/Menu';
 import PieChart from '../../components/PieChart';
 import Top10 from '../../components/Top10';
+import DownloadCSV from '../../components/DownloadCSV';
 import { parseTop10Today, parseTop10LastWeek, parseTop10LastMonth, parseTop10AllPeriod, parseTimeLastWeek } from '../../util';
 
 const App = (props) => {
@@ -21,6 +22,7 @@ const App = (props) => {
         <StyledApp darkMode={darkMode}>
             <Header shouldMonitor={data.shouldMonitor} darkMode={darkMode} setDarkMode={setDarkMode} data={data}/>
             <Title darkMode={darkMode}>Suas estatísticas</Title>
+            <DownloadCSV darkMode={darkMode} data={data}/>
             <Menu darkMode={darkMode} range={range} setRange={setRange}/>
             <Charts>
                 <PieChart darkMode={darkMode} data={parser[range](data)}/>
