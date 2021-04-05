@@ -4,8 +4,9 @@ import Header from '../../components/Header';
 import Menu from '../../components/Menu';
 import PieChart from '../../components/PieChart';
 import Top10 from '../../components/Top10';
-import DownloadCSV from '../../components/DownloadCSV';
 import { parseTop10Today, parseTop10LastWeek, parseTop10LastMonth, parseTop10AllPeriod, parseTimeLastWeek } from '../../util';
+import { Tabs } from '../../components/Tabs';
+import { Options } from '../../components/Options';
 
 const App = (props) => {
     const [darkMode, setDarkMode] = useState(true)
@@ -18,16 +19,31 @@ const App = (props) => {
         'month': parseTop10LastMonth,
         'all': parseTop10AllPeriod
     }
-    return (
-        <StyledApp darkMode={darkMode}>
-            <Header shouldMonitor={data.shouldMonitor} darkMode={darkMode} setDarkMode={setDarkMode} data={data}/>
-            <Title darkMode={darkMode}>Suas estatísticas</Title>
-            <DownloadCSV darkMode={darkMode} data={data}/>
-            <Menu darkMode={darkMode} range={range} setRange={setRange}/>
+
+    const ChartsTab = () => {
+        return (
             <Charts>
+                <Title darkMode={darkMode}>Suas estatísticas</Title>
+                <Menu darkMode={darkMode} range={range} setRange={setRange}/>
                 <PieChart darkMode={darkMode} data={parser[range](data)}/>
                 <Top10 darkMode={darkMode} data={parseTimeLastWeek(data)}/>
             </Charts>
+        )
+    }
+
+    return (
+        <StyledApp darkMode={darkMode}>
+            <Header darkMode={darkMode}/>
+            <Tabs 
+                tab2={<ChartsTab/>} 
+                tab1={<Options 
+                    data={data} 
+                    darkMode={darkMode} 
+                    setDarkMode={setDarkMode} 
+                    shouldMonitor={data.shouldMonitor}
+                />}
+                darkMode={darkMode} 
+            />
         </StyledApp>
     )
 }
