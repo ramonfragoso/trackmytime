@@ -12,7 +12,6 @@ function helper(url){
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log("@");
         chrome.browserAction.setIcon({
             path: request.newIconPath
         });
@@ -91,4 +90,3 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 chrome.tabs.onActivated.addListener(function(details){
     handler(details);
 })
-

@@ -11,7 +11,11 @@ export const Notifications = props => {
   const handleSubmit = (website, hour, minute) => {
     if(hasInvalidValues()) return
     const seconds = (hour*60*60) + (minute*60)
-    setNotificationList([...notificationList, { website, hour, minute, seconds }])
+    const date = new Date()
+    setNotificationList([{ website, hour, minute, seconds, createdAt: new Date(), notified: false }, ...notificationList])
+    chrome.storage.local.set({notifications: [{ website, seconds, createdAt: date.toJSON(), notified: false }, ...notificationList]}, function() {
+      console.log('Value is set to ' + notificationList.toString());
+    });
   }
 
   const hasInvalidValues = () => {
@@ -33,7 +37,7 @@ export const Notifications = props => {
       <Button onClick={() => handleSubmit(website, hour, minute)}>Criar notificação</Button>
 
       <NotificationsList>
-        {notificationList.map(notification => 
+        {notificationList && notificationList.map(notification => 
           <Notification darkMode={darkMode}>
             <Website>{notification.website}</Website>
             <Time>
