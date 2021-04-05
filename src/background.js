@@ -10,44 +10,52 @@ function helper(url){
     return "";
 }
 
-function notificationAction() {
-    chrome.notifications.create(
-        'trackmytime', {
-            type: 'basic',
-            iconUrl: "logo192.png",
-            title: "trackmytime",
-            message: "Teste",
-            priority: 1
-        });
+
+const notifyMe = (data) => {
+    var timestamp = new Date().getTime();
+    var id = 'trackmytime' + timestamp;
+    console.log(data)
+    chrome.notifications.create(id, {title: "Alerta de tempo", type: "basic", iconUrl: "logo128.png", message: `Você passou ${data.hour} hora(s) e ${data.minute} minuto(s) em ${data.website}!`}, (notificationId) => {
+        console.log(notificationId)
+        console.log("Last error:", chrome.runtime.lastError); 
+    })
 }
 
-const notifyMe = () => {
-    var timestamp = new Date().getTime();
-    var id = 'myid' + timestamp;
-    console.log(id)
-    chrome.notifications.clear('trackmytime', function(wasCleared) {
-        if (!wasCleared) {
-            chrome.notifications.create("trackmytime", {title: "Teste titul2" + id,priority: 1, type: "basic", iconUrl: "logo128.png", message: "Teste message" + id}, (notificationId) => {
-                console.log(notificationId)
-                console.log("Last error:", chrome.runtime.lastError); 
-                chrome.notifications.clear("trackmytime", (wasCleared) => {
-                    if(wasCleared){
-                        console.log("Limpou algo sei la")
-                    }
-                })
-            })
-       }
-       else {
-        notificationAction();
-       }
+const getWebsiteIndex = (lastVisited, notifications) => {
+    for(let i = 0; i < notifications.length; i++){
+        if(notifications[i].website === lastVisited){
+            return i;
+        }
+    }
+    return -1;
+}
+
+const checkNotification = () => {
+    chrome.storage.local.get(['notifications', 'last_visited'], function(data){
+        console.log(data);
+        const lastVisited = data.last_visited.split("://")[1].split("/")[0];
+        const websiteIndex = getWebsiteIndex(lastVisited, data.notifications);
+        if(websiteIndex != "-1"){
+            let cur = [...data.notifications];
+            cur[websiteIndex] = {...cur[websiteIndex], seconds: cur[websiteIndex].seconds - 1};
+            if(cur[websiteIndex].seconds == 0){
+                let notifyWebsite = cur.splice(websiteIndex, 1)[0]
+                notifyMe(notifyWebsite);
+            }
+            chrome.storage.local.set({'notifications': cur}, function() {
+                console.log('Value is set to ' + cur);
+              });
+        }
+        console.log(lastVisited);
+        console.log(data.notifications);
+        console.log(websiteIndex);
     })
 }
 
 const initBackgroundInterval = () => {
-    setTimeout(() => {
-        notifyMe();
-        console.log("Teste")
-    }, 5000);
+    setInterval(() => {
+        checkNotification();
+    }, 1000);
 }
 
 chrome.runtime.onMessage.addListener(

@@ -73,7 +73,7 @@ export const Notification = styled.div`
   flex-direction: row; 
   justify-content: space-between;    
   padding: 10px 0px;
-  width: 330px;
+  width: 400px;
   border: 1px solid;
   color: ${props => props.darkMode ? 'white' : '#151424'};
 

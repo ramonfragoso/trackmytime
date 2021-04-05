@@ -5,8 +5,9 @@ import { Button, ButtonGroup, CSVButton } from './style'
 export const Options = ({darkMode, setDarkMode, shouldMonitor, data}) => {
 
   const [isCounterOn, setIsCounterOn] = useState(shouldMonitor)
-  const [openCreateNotification, setOpenCreateNotification] = useState(false)
+  const [openCreateNotification, setOpenCreateNotification] = useState(false);
 
+  
   const handleDarkMode = () => {
       setDarkMode(!darkMode);
   }   
@@ -46,13 +47,13 @@ export const Options = ({darkMode, setDarkMode, shouldMonitor, data}) => {
 
   return (
     <ButtonGroup>
-      <Button onClick={handleDarkMode}>{darkMode ? 'Ativar ' : 'Desativar '} modo escuro</Button>      
-      <Button onClick={handleCounter}>{isCounterOn ? 'Ativar ' : 'Desativar '} contador</Button>      
+      <Button onClick={handleDarkMode}>{darkMode ? 'Desativar' : 'Ativar'} modo escuro</Button>      
+      <Button onClick={handleCounter}>{isCounterOn ? 'Desativar' : 'Ativar'} contador</Button>      
       <CSVButton {...csvreport}>Exportar CSV</CSVButton>
 
 
       <Button onClick={() => setOpenCreateNotification(!openCreateNotification)}>Criar notificação</Button>
-      {openCreateNotification && <Notifications darkMode={darkMode}/>}
+      {openCreateNotification && <Notifications data={data} darkMode={darkMode}/>}
     </ButtonGroup>
   )
 }
