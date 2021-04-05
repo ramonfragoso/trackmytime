@@ -7,7 +7,7 @@
     "storage",
     "webNavigation",
     "tabs",
-    "runtime"
+    "notifications"
   ],
   "background": {
     "scripts": ["static/js/background.js"]

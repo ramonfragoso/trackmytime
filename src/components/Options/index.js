@@ -12,6 +12,7 @@ export const Options = ({darkMode, setDarkMode, shouldMonitor, data}) => {
   }   
 
   const handleCounter = () => {
+      console.log("@");
       chrome.storage.local.get(null, function(data){
           chrome.storage.local.set({"shouldMonitor": !isCounterOn, "last_visited": ""}, () => {})
       });
@@ -46,7 +47,7 @@ export const Options = ({darkMode, setDarkMode, shouldMonitor, data}) => {
   return (
     <ButtonGroup>
       <Button onClick={handleDarkMode}>{darkMode ? 'Ativar ' : 'Desativar '} modo escuro</Button>      
-      <Button onChange={handleCounter}>{isCounterOn ? 'Ativar ' : 'Desativar '} contador</Button>      
+      <Button onClick={handleCounter}>{isCounterOn ? 'Ativar ' : 'Desativar '} contador</Button>      
       <CSVButton {...csvreport}>Exportar CSV</CSVButton>
 
 
